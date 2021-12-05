@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.*;
 public class FilmController {
 
     private FilmRepository repository;
+    private FilmMapper filmMapper;
 
 
     @Autowired
-    public FilmController(FilmRepository repository) {
+    public FilmController(FilmRepository repository, FilmMapper filmMapper) {
         this.repository = repository;
+        this.filmMapper = filmMapper;
     }
 
     @GetMapping("/{id}")
@@ -39,8 +41,8 @@ public class FilmController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<FilmEntity> createFilm(@RequestBody FilmModel filmModel) {
-        FilmMapper filmMapper = new FilmMapper();
-        FilmEntity filmEntity = filmMapper.filmModelToFilm(filmModel);
+
+        FilmEntity filmEntity = filmMapper.filmModelToFilmEntity(filmModel);
 
         try{
             repository.saveAndFlush(filmEntity);

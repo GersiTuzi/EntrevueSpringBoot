@@ -3,22 +3,23 @@ package com.example.entrevueSpringBoot.mapper;
 import com.example.entrevueSpringBoot.entity.ActeurEntity;
 import com.example.entrevueSpringBoot.entity.FilmEntity;
 import com.example.entrevueSpringBoot.model.FilmModel;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Component
 public class FilmMapper {
 
     public FilmMapper() {
     }
 
-    public FilmEntity filmModelToFilm(FilmModel model){
+    public FilmEntity filmModelToFilmEntity(FilmModel model){
 
-        FilmEntity filmEntity = new FilmEntity();
-        filmEntity.setDescription(model.getDescription());
-        filmEntity.setTitre(model.getTitre());
-        filmEntity.setActeurs(getActeurs(model));
-        return filmEntity;
+        FilmEntity film = new FilmEntity();
+        film.setDescription(model.getDescription());
+        film.setTitre(model.getTitre());
+        film.setActeurs(getActeurs(model));
+        return film;
     }
 
     private List<ActeurEntity> getActeurs(FilmModel model) {
